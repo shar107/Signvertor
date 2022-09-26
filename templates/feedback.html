@@ -1,0 +1,357 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+
+  <meta charset="UTF-8">
+  
+<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<meta name="apple-mobile-web-app-title" content="CodePen">
+
+<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+<link rel="mask-icon" type="" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+
+
+  <title>CodePen - Feedback Form</title>
+  
+  
+  
+  
+<style>
+
+label{
+  text-color: #CC3853;
+}
+span{
+  color: black;
+}
+aside{
+max-width:700px;
+  margin:auto;
+}
+.survey-hr{
+margin:30px 0;
+  border: .5px solid #ddd;
+}
+.star-rating {
+   margin: 25px 0 0px;
+  font-size: 0;
+  white-space: nowrap;
+  display: inline-block;
+  width: 175px;
+  height: 35px;
+  overflow: hidden;
+  position: relative;
+  background: url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjREREREREIiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=');
+  background-size: contain;
+}
+.star-rating i {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 20%;
+  z-index: 1;
+  background: url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjRkZERjg4IiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=');
+  background-size: contain;
+}
+.star-rating input {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  opacity: 0;
+  display: inline-block;
+  width: 20%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+  position: relative;
+}
+.star-rating input:hover + i,
+.star-rating input:checked + i {
+  opacity: 1;
+}
+.star-rating i ~ i {
+  width: 40%;
+}
+.star-rating i ~ i ~ i {
+  width: 60%;
+}
+.star-rating i ~ i ~ i ~ i {
+  width: 80%;
+}
+.star-rating i ~ i ~ i ~ i ~ i {
+  width: 100%;
+}
+.choice {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 20px;
+  display: block;
+}
+span.scale-rating{
+margin: 5px 0 15px;
+    display: inline-block;
+   
+    width: 100%;
+   
+}
+span.scale-rating>label {
+  position:relative;
+    -webkit-appearance: none;
+  outline:0 !important;
+    border: 1px solid grey;
+    height:33px;
+    margin: 0 5px 0 0;
+  width: calc(10% - 7px);
+    float: left;
+  cursor:pointer;
+}
+span.scale-rating label {
+  position:relative;
+    -webkit-appearance: none;
+  outline:0 !important;
+    height:33px;
+    margin: 0 5px 0 0;
+  width: calc(10% - 7px);
+    float: left;
+  cursor:pointer;
+}
+span.scale-rating input[type=radio] {
+  position:absolute;
+    -webkit-appearance: none;
+  opacity:0;
+  outline:0 !important;
+    /*border-right: 1px solid grey;*/
+    height:33px;
+    margin: 0 5px 0 0;
+  
+  width: 100%;
+    float: left;
+  cursor:pointer;
+  z-index:3;
+}
+span.scale-rating label:hover{
+background:#fddf8d;
+}
+span.scale-rating input[type=radio]:last-child{
+border-right:0;
+}
+span.scale-rating label input[type=radio]:checked ~ label{
+    -webkit-appearance: none;
+
+    margin: 0;
+  background:#fddf8d;
+}
+span.scale-rating label:before
+{
+  content:attr(value);
+    top: 7px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    vertical-align: middle;
+  z-index:2;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+</head>
+
+<body translate="no" >
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+<style>
+
+body{
+font-family: sans-serif;
+  margin:0;
+  padding:0;
+}
+form{
+color:#f5ec00;
+font-size:18px;
+}
+{% comment %} label{
+color:#000;
+} {% endcomment %}
+</style>
+<section style="border:2px solid #43a7d5">
+<!-- <div >
+ <img style="padding-top:12px" src="https://ci6.googleusercontent.com/proxy/YUEPeVZTOrJOZET7DjMiSEJ_LYhdVTBUMOn3mf3rzTC6PfZ9RpzpkjC596L1cayhhj5_-ZUsPago=s0-d-e1-ft#http://www.pasco.in/images/logo.png" class="CToWUd">
+  <img style="float:right" src="https://ci3.googleusercontent.com/proxy/hiW20TciKNLKBE6fk7-RjkUugbHxgfS6hUgD04RR5LcJk4MB27LEhOEpduAwW57MJFIbTS6NoKc3w0D6tfA87A=s0-d-e1-ft#http://www.pasco.in/images/maruti-logo.png" class="CToWUd">
+</div> -->
+
+  <aside style="padding:15px">
+<p>Dear User,<br>
+Thank you for using Aidable. We would like to know how we performed. Please spare some moments to give us your valuable
+feedback as it will help us in improving your user experience.</p>
+
+<h4>Please rate your user experience for the following parameters</h4>
+
+<form method="post" action='/' onSubmit="alert('Thank you for your feedback.');">
+    {% csrf_token %}
+<label>1. Your overall experience with us ?</label><br>
+  <!-- <label>&nbsp;&nbsp;&nbsp;&nbsp; हमारे साथ आपके समग्र अनुभव?</label><br> -->
+<span class="star-rating">
+  <input type="radio" name="rating" value="1"><i></i>
+  <input type="radio" name="rating" value="2"><i></i>
+  <input type="radio" name="rating" value="3"><i></i>
+  <input type="radio" name="rating" value="4"><i></i>
+  <input type="radio" name="rating" value="5"><i></i>
+</span>
+
+  <div class="clear"></div> 
+  <hr class="survey-hr">
+<label>2. Clarity of widgets and navigation through the pages while using Aidable.</label><br>
+<span class="star-rating">
+  <input type="radio" name="rating" value="1"><i></i>
+  <input type="radio" name="rating" value="2"><i></i>
+  <input type="radio" name="rating" value="3"><i></i>
+  <input type="radio" name="rating" value="4"><i></i>
+  <input type="radio" name="rating" value="5"><i></i>
+</span>
+
+  <div class="clear"></div> 
+  <hr class="survey-hr">
+<label>3. Satisfactory tarnslation and animation of your speech into sign language.</label><br>
+<span class="star-rating">
+  <input type="radio" name="rating" value="1"><i></i>
+  <input type="radio" name="rating" value="2"><i></i>
+  <input type="radio" name="rating" value="3"><i></i>
+  <input type="radio" name="rating" value="4"><i></i>
+  <input type="radio" name="rating" value="5"><i></i>
+</span>
+
+  <div class="clear"></div> 
+  <hr class="survey-hr">
+<label>4. Experience while interacting with public through Aidable.</label><br>
+<span class="star-rating">
+  <input type="radio" name="rating" value="1"><i></i>
+  <input type="radio" name="rating" value="2"><i></i>
+  <input type="radio" name="rating" value="3"><i></i>
+  <input type="radio" name="rating" value="4"><i></i>
+  <input type="radio" name="rating" value="5"><i></i>
+</span>
+
+  <div class="clear"></div> 
+  <hr class="survey-hr">
+<label>5. Aidable helped you communicate your thoughts with deaf and mute people. </label><br>
+<span class="star-rating">
+  <input type="radio" name="rating" value="1"><i></i>
+  <input type="radio" name="rating" value="2"><i></i>
+  <input type="radio" name="rating" value="3"><i></i>
+  <input type="radio" name="rating" value="4"><i></i>
+  <input type="radio" name="rating" value="5"><i></i>
+</span>
+
+  <div class="clear"></div> 
+  <hr class="survey-hr">
+<!-- <label>6. Cleanliness of vehicle, interior as well as exterior</label><br>
+<span class="star-rating">
+  <input type="radio" name="rating" value="1"><i></i>
+  <input type="radio" name="rating" value="2"><i></i>
+  <input type="radio" name="rating" value="3"><i></i>
+  <input type="radio" name="rating" value="4"><i></i>
+  <input type="radio" name="rating" value="5"><i></i>
+</span>
+
+  <div class="clear"></div> 
+  <hr class="survey-hr"> -->
+<label>6. On scale of 1 to 10, how likely are you to recommend Aidable to your friends.</label><br><br/>
+  <div style="color:grey">
+    <span style="float:left">
+     LESS LIKELY
+    </span>
+    <span style="float:right">
+      HIGHLY LIKELY
+    </span>
+    
+  </div>
+<span class="scale-rating">
+  <label value="1">
+  <input type="radio" name="rating" >
+  <label style="width:100%;"></label>
+  </label>
+  <label value="2">
+  <input type="radio" name="rating" >
+  <label style="width:100%;"></label>
+  </label>
+  <label value="3">
+  <input type="radio" name="rating">
+  <label style="width:100%;"></label>
+  </label>
+  <label value="4">
+  <input type="radio" name="rating">
+  <label style="width:100%;"></label>
+  </label>
+  <label value="5">
+  <input type="radio" name="rating">
+  <label style="width:100%;"></label>
+  </label>
+  <label value="6">
+  <input type="radio" name="rating">
+  <label style="width:100%;"></label>
+  </label>
+  <label value="7">
+  <input type="radio" name="rating">
+  <label style="width:100%;"></label>
+  </label>
+  <label value="8">
+  <input type="radio" name="rating">
+  <label style="width:100%;"></label>
+  </label>
+  <label value="9">
+  <input type="radio" name="rating">
+  <label style="width:100%;"></label>
+  </label>
+  <label value="10">
+  <input type="radio" name="rating" value="10">
+  <label style="width:100%;"></label>
+  </label>
+</span>
+
+  <div class="clear"></div> 
+  <hr class="survey-hr"> 
+<label for="m_3189847521540640526commentText">8. Any Other suggestions:</label><br/><br/>
+<textarea cols="75" name="commentText" rows="5" style="width:320px"></textarea><br>
+<br>
+  <div class="clear"></div> 
+<input style="background:#43a7d5;color:#fff;padding:12px;border:0" type="submit" value="Submit your review">&nbsp;
+</form>
+  </aside>
+</section>
+  
+  
+  
+  
+
+</body>
+
+</html>
+ 
+
+{% endblock %}
